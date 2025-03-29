@@ -7,7 +7,10 @@ export const ChatMessage: React.FC<{ message: Message }> = ({ message }) => {
     <div className={`message ${message.isBot ? 'bot' : 'user'}`}>
       <div className="message-content">
         {message.isBot ? (
-          <ReactMarkdown>{message.content}</ReactMarkdown>
+          <>
+            <ReactMarkdown>{message.content}</ReactMarkdown>
+            {message.isLoading && <span className="loading-indicator">...</span>}
+          </>
         ) : (
           message.content
         )}

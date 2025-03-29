@@ -20,12 +20,16 @@ export const ChatPage: React.FC = () => {
   useEffect(scrollToBottom, [messages]);
 
   const handleSubmit = async (query: string) => {
+    // Add the user's message
     addMessage({ content: query, isBot: false });
+
+    // Add a placeholder for the bot's response
     addMessage({ content: '', isBot: true, isLoading: true });
-    
-    socket?.emit('query', {
+
+    // Emit the query and conversation ID to the WebSocket server
+    socket?.emit('chat', {
       query,
-      conversation_id: conversationId
+      conversation_id: conversationId, // Use the conversationId from the hook
     });
   };
 
